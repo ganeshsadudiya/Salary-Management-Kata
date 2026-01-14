@@ -17,4 +17,8 @@ RSpec.describe Employee, type: :model do
     employee = Employee.new( full_name: "Ganesh Sadudiya", job_title: "Backend Engineer", country: "India")
     expect(employee).not_to be_valid
   end
+  it "is invalid when salary is not numeric" do
+    employee = Employee.new( full_name: "Ganesh Sadudiya", job_title: "Backend Engineer", country: "India", salary: "abc" )
+    expect(employee).not_to be_valid
+  end
 end
