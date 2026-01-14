@@ -47,5 +47,20 @@ RSpec.describe "Employees API", type: :request do
       expect(JSON.parse(response.body)["job_title"]).to eq("Senior Developer")
     end
   end
+  describe "DELETE /employees/:id" do
+    it "deletes an employee" do
+      employee = Employee.create!(
+        full_name: "Ganesh",
+        job_title: "Developer",
+        country: "India",
+        salary: 40000
+      )
 
+      expect {
+        delete "/employees/#{employee.id}"
+      }.to change(Employee, :count).by(-1)
+
+      expect(response.status).to eq(204)
+    end
+  end
 end
