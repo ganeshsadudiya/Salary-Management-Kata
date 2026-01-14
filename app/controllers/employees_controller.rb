@@ -20,7 +20,11 @@ class EmployeesController < ApplicationController
 
   def salary
     gross = employee.salary
-    tds = gross * 0.10
+    tds =
+      case employee.country
+      when 'India' then gross * 0.10
+      when 'United States' then gross * 0.12
+      end
     net   = gross - tds
 
     render json: {
