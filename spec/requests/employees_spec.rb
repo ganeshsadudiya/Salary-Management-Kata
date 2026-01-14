@@ -63,4 +63,18 @@ RSpec.describe "Employees API", type: :request do
       expect(response.status).to eq(204)
     end
   end
+  describe 'GET /employees/:id/salary' do
+    it 'returns 10% TDS for India employee' do
+      employee = Employee.create!(
+      full_name: 'Rahul',
+      job_title: 'Developer',
+      country: 'India',
+      salary: 100000
+      )
+
+      get "/employees/#{employee.id}/salary"
+
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
