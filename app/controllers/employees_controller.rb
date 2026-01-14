@@ -13,6 +13,11 @@ class EmployeesController < ApplicationController
     render json: employee
   end
 
+  def destroy
+    employee.destroy
+    head :no_content
+  end
+
   private
 
   def employee
