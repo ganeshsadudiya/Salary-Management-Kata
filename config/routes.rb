@@ -1,4 +1,3 @@
 Rails.application.routes.draw do
-  post "/employees", to: "employees#create"
-  get "/employees/:id", to: "employees#show"
+  resources :employees, only: [:create, :show]
 end

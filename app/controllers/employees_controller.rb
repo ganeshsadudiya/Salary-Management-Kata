@@ -5,13 +5,16 @@ class EmployeesController < ApplicationController
   end
 
   def show
-    employee = Employee.find(params[:id])
     render json: employee
   end
 
 
   private
 
+  def employee
+    @employee ||= Employee.find(params[:id])
+  end
+  
   def employee_params
     params.require(:employee).permit(:full_name, :job_title, :country, :salary)
   end
