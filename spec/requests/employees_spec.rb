@@ -30,4 +30,22 @@ RSpec.describe "Employees API", type: :request do
       expect(JSON.parse(response.body)["id"]).to eq(employee.id)
     end
   end
+  describe "PUT /employees/:id" do
+    it "updates an existing employee" do
+      employee = Employee.create!(
+        full_name: "Ganesh",
+        job_title: "Developer",
+        country: "India",
+        salary: 40000
+      )
+
+      put "/employees/#{employee.id}", params: {
+        employee: { job_title: "Senior Developer"}
+      }
+
+      expect(response.status).to eq(200)
+      expect(JSON.parse(response.body)["job_title"]).to eq("Senior Developer")
+    end
+  end
+
 end
