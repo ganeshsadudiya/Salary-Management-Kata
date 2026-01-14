@@ -36,12 +36,23 @@ class EmployeesController < ApplicationController
   end
 
   def salary_metrics
-    employees = Employee.where(country: params[:country])
-    render json: {
-      min: employees.minimum(:salary).to_f,
-      max: employees.maximum(:salary).to_f,
-      average: employees.average(:salary).to_f
-    }
+    if params[:country]
+      employees = Employee.where(country: params[:country])
+      render json: {
+        min: employees.minimum(:salary).to_f,
+        max: employees.maximum(:salary).to_f,
+        average: employees.average(:salary).to_f
+      }
+    elsif params[:job_title]
+      employees = Employee.where(job_title: params[:job_title])
+      render json: {
+        min: employees.minimum(:salary).to_f,
+        max: employees.maximum(:salary).to_f,
+        average: employees.average(:salary).to_f
+      }
+    else
+      render json: { error: 'Provide country or job_title param' }, status: :bad_request
+    end
   end
 
   private
