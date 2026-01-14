@@ -108,4 +108,13 @@ RSpec.describe "Employees API", type: :request do
       expect(body['tds']).to eq(0)
     end
   end
+  describe 'GET /salaries_metrics' do
+    it 'returns min, max, and avg salary for a country' do
+      Employee.create!(full_name: 'A', job_title: 'Dev', country: 'India', salary: 50000)
+      Employee.create!(full_name: 'B', job_title: 'Dev', country: 'India', salary: 100000)
+
+      get '/employees/salary_metrics', params: { country: 'India' }
+      expect(response).to have_http_status(:ok)
+    end
+  end
 end
