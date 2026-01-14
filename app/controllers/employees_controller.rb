@@ -36,7 +36,12 @@ class EmployeesController < ApplicationController
   end
 
   def salary_metrics
-    render json: {}
+    employees = Employee.where(country: params[:country])
+    render json: {
+      min: employees.minimum(:salary).to_f,
+      max: employees.maximum(:salary).to_f,
+      average: employees.average(:salary).to_f
+    }
   end
 
   private
