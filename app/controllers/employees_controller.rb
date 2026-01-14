@@ -24,6 +24,7 @@ class EmployeesController < ApplicationController
       case employee.country
       when 'India' then gross * 0.10
       when 'United States' then gross * 0.12
+      else 0
       end
     net   = gross - tds
 
