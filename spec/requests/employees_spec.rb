@@ -74,7 +74,12 @@ RSpec.describe "Employees API", type: :request do
 
       get "/employees/#{employee.id}/salary"
 
+      body = JSON.parse(response.body)
+
       expect(response).to have_http_status(:ok)
+      expect(body['gross_salary']).to eq(100000.0)
+      expect(body['tds']).to eq(10000)
+      expect(body['net_salary']).to eq(90000)
     end
   end
 end
