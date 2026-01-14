@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-resources :employees, only: [:create, :show, :update, :destroy]
+  resources :employees, only: [:create, :show, :update, :destroy] do
+    get :salary, on: :member
+  end
 end

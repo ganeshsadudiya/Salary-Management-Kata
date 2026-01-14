@@ -18,6 +18,10 @@ class EmployeesController < ApplicationController
     head :no_content
   end
 
+  def salary
+    render json: {}
+  end
+
   private
 
   def employee
