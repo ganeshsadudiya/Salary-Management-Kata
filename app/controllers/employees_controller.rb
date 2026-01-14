@@ -19,7 +19,15 @@ class EmployeesController < ApplicationController
   end
 
   def salary
-    render json: {}
+    gross = employee.salary
+    tds = gross * 0.10
+    net   = gross - tds
+
+    render json: {
+      gross_salary: gross.to_f,
+      tds: tds.to_f,
+      net_salary: net.to_f
+    }
   end
 
   private
