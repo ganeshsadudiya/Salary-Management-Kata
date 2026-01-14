@@ -81,5 +81,18 @@ RSpec.describe "Employees API", type: :request do
       expect(body['tds']).to eq(10000)
       expect(body['net_salary']).to eq(90000)
     end
+    it 'returns 12% TDS for US employee' do
+      employee = Employee.create!(
+        full_name: 'John',
+        job_title: 'Engineer',
+        country: 'United States',
+        salary: 100000
+      )
+
+      get "/employees/#{employee.id}/salary"
+
+      body = JSON.parse(response.body)
+      expect(body['tds']).to eq(12000)
+    end
   end
 end
