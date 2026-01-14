@@ -114,7 +114,12 @@ RSpec.describe "Employees API", type: :request do
       Employee.create!(full_name: 'B', job_title: 'Dev', country: 'India', salary: 100000)
 
       get '/employees/salary_metrics', params: { country: 'India' }
+
+      body = JSON.parse(response.body)
       expect(response).to have_http_status(:ok)
+      expect(body['min']).to eq(50000)
+      expect(body['max']).to eq(100000)
+      expect(body['average']).to eq(75000)
     end
   end
 end
