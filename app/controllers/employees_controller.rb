@@ -8,13 +8,17 @@ class EmployeesController < ApplicationController
     render json: employee
   end
 
+  def update
+    employee.update!(employee_params)
+    render json: employee
+  end
 
   private
 
   def employee
     @employee ||= Employee.find(params[:id])
   end
-  
+
   def employee_params
     params.require(:employee).permit(:full_name, :job_title, :country, :salary)
   end
