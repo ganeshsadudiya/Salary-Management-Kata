@@ -94,5 +94,18 @@ RSpec.describe "Employees API", type: :request do
       body = JSON.parse(response.body)
       expect(body['tds']).to eq(12000)
     end
+    it 'returns no deductions for other countries' do
+      employee = Employee.create!(
+          full_name: 'Alex',
+          job_title: 'Dev',
+          country: 'Germany',
+          salary: 100000
+      )
+
+      get "/employees/#{employee.id}/salary"
+      body = JSON.parse(response.body)
+
+      expect(body['tds']).to eq(0)
+    end
   end
 end
