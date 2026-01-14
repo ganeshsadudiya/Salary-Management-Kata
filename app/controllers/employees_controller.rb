@@ -35,6 +35,10 @@ class EmployeesController < ApplicationController
     }
   end
 
+  def salary_metrics
+    render json: {}
+  end
+
   private
 
   def employee
